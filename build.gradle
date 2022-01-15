@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group 'org.pk.work'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+task WorkHelperJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Version': project.version
+        attributes 'Main-Class': 'org.pk.work.AppLauncher'
+    }
+    enabled = true
+    baseName  'WorkHelper'
+    from sourceSets.main.output
+    include 'org/pk/work/**'
+}
+
+test {
+    useJUnitPlatform()
+}
